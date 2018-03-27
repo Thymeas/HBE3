@@ -1,14 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngineInternal.Input;
+﻿using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     private float _startSpeed = 20.0f, _maxSpeed = 75.0f;
     [SerializeField] private float _moveSpeed;
     public PlayerMovement[] players;
-    [SerializeField] private bool _canJump;
 
     private void Start()
     {
@@ -45,11 +41,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump(bool isPressingJump)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (_canJump)
+        if (isPressingJump && Physics.Raycast(transform.position, Vector3.down, 0.5f))
                 transform.GetComponent<Rigidbody>().AddForce(0, 200, 0);
-            _canJump = false || Physics.Raycast(transform.position, Vector3.down, 0.25f);
-        }
     }
 }
