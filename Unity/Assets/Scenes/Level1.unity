@@ -205,6 +205,16 @@ MonoBehaviour:
   _waypoints: []
   _players: []
   _counter: 0
+  _lap: 0
+  _xs:
+  - Fraction: 0
+    PlayerMovement: {fileID: 0}
+  - Fraction: 0
+    PlayerMovement: {fileID: 0}
+  - Fraction: 0
+    PlayerMovement: {fileID: 0}
+  - Fraction: 0
+    PlayerMovement: {fileID: 0}
 --- !u!4 &43605739
 Transform:
   m_ObjectHideFlags: 0
@@ -349,7 +359,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 4929f4a4899b57c44877625ed73d1ff7, type: 2}
     - target: {fileID: 1107303008147566, guid: 0e8fd2c29155fc942b80c70ccc748040, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0e8fd2c29155fc942b80c70ccc748040, type: 2}
@@ -364,7 +374,7 @@ GameObject:
   - component: {fileID: 545440939}
   - component: {fileID: 545440940}
   m_Layer: 0
-  m_Name: left
+  m_Name: 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -479,6 +489,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &691821648 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1502288553820802, guid: b6821ae6542ae1c408ea3c68eba983fa,
+    type: 2}
+  m_PrefabInternal: {fileID: 1149359567}
+--- !u!114 &691821651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 691821648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4280e9b2035b3479bd0637a9c554d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveSpeed: 0
+  players: []
+  _waypoint: []
+  counter: 0
+  distance: 2
 --- !u!1 &703907644
 GameObject:
   m_ObjectHideFlags: 0
@@ -829,6 +860,27 @@ Prefab:
     - {fileID: 81837342441099764, guid: 4853d6d8fa36dd74db6bee70ee0310e1, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 4853d6d8fa36dd74db6bee70ee0310e1, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &949004322 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1107303008147566, guid: 0e8fd2c29155fc942b80c70ccc748040,
+    type: 2}
+  m_PrefabInternal: {fileID: 342352186}
+--- !u!114 &949004325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 949004322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4280e9b2035b3479bd0637a9c554d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveSpeed: 0
+  players: []
+  _waypoint: []
+  counter: 0
+  distance: 2
 --- !u!1 &1084779868
 GameObject:
   m_ObjectHideFlags: 0
@@ -969,7 +1021,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 4929f4a4899b57c44877625ed73d1ff7, type: 2}
     - target: {fileID: 1502288553820802, guid: b6821ae6542ae1c408ea3c68eba983fa, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b6821ae6542ae1c408ea3c68eba983fa, type: 2}
@@ -1330,7 +1382,7 @@ GameObject:
   - component: {fileID: 1851958368}
   - component: {fileID: 1851958369}
   m_Layer: 0
-  m_Name: right
+  m_Name: 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1433,7 +1485,7 @@ GameObject:
   - component: {fileID: 1887531530}
   - component: {fileID: 1887531531}
   m_Layer: 0
-  m_Name: mid
+  m_Name: 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

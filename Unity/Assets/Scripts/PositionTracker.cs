@@ -1,6 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using UnityEngine;
+
+
+[Serializable]
+public struct X
+{
+    public float Fraction;
+    public PlayerMovement PlayerMovement;
+}
 
 public class PositionTracker : MonoBehaviour
 {
@@ -9,6 +19,7 @@ public class PositionTracker : MonoBehaviour
     [SerializeField] private int _counter;
     public int _lap;
     private float[] _fraction = new float[4];
+    [SerializeField] private List<X> _xs = new List<X>(4);
 
     private void Start()
     {
@@ -29,21 +40,30 @@ public class PositionTracker : MonoBehaviour
 
     private void CalculatePlayerFraction()
     {
-            for (int t = 0; t < _players.Length; t++)
+        for (var t = 0; t < _players.Length; t++)
+        {
+            var player = _players[t];
+            var fraction = GetFractionOfPathCovered(_players[t].transform.position,
+                _waypoints[_counter].transform.position,
+                _waypoints[_counter + 1].transform.position);
+
+            _xs[t] = new X
             {
-                GetFractionOfPathCovered(_players[t].transform.position, _waypoints[_counter].transform.position,
-                    _waypoints[_counter + 1].transform.position, t);
-            } 
+                Fraction = fraction,
+                PlayerMovement = player
+            };
+        }
+
+        _xs = _xs.OrderBy(x => x.Fraction).ToList();
     }
 
-    private float GetFractionOfPathCovered(Vector3 playerPos, Vector3 lastWaypointReached, Vector3 nextWaypoint, int player)
+    private float GetFractionOfPathCovered(Vector3 playerPos, Vector3 lastWaypointReached, Vector3 nextWaypoint)
     {
-        Vector3 displacementFromCurrentWaypoint = playerPos - lastWaypointReached;
-        Vector3 currentSegmentVector = nextWaypoint - lastWaypointReached;
-        _fraction[player] = Vector3.Dot(displacementFromCurrentWaypoint, currentSegmentVector) /
-                         currentSegmentVector.sqrMagnitude;
-        print(Mathf.Min(_fraction) + player);
-        return _fraction[player];
-    }
+        var displacementFromCurrentWaypoint = playerPos - lastWaypointReached;
+        var currentSegmentVector = nextWaypoint - lastWaypointReached;
 
+        return Vector3.Dot(displacementFromCurrentWaypoint, currentSegmentVector) /
+               currentSegmentVector.sqrMagnitude;
+        ;
+    }
 }
