@@ -9,15 +9,17 @@ public class PlayerMovement : MonoBehaviour
     public Waypoints[] _waypoint;
     public int counter;
     [SerializeField] private float distance = 2.0f;
+    private PositionTracker _posTracker;
 
     private void Start()
     {
         _moveSpeed = _startSpeed;
         players = FindObjectsOfType<PlayerMovement>();
         _waypoint = FindObjectsOfType<Waypoints>();
+        _posTracker = FindObjectOfType<PositionTracker>();
     }
 
-    void Update()
+    private void Update()
     {
         CalculateNextWaypoint();
         MoveForward(Input.GetAxis("Vertical"));
@@ -27,18 +29,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void CalculateNextWaypoint()
     {
-        var direction = Vector3.zero;
-        direction = _waypoint[counter].transform.position - transform.position;
+        var direction = _waypoint[counter].transform.position - transform.position;
         if (direction.magnitude < distance)
         {
             if (counter < _waypoint.Length - 1)
                 counter++;
             else
+            {
                 counter = 0;
+                _posTracker._lap += 1;
+            }
         }
     }
 
-    void MoveForward(float input)
+    private void MoveForward(float input)
     {
         var movement = Vector3.forward * input;
         transform.Translate(movement * Time.deltaTime * _moveSpeed);
@@ -49,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
             _moveSpeed -= 0.05f;
     }
 
-    void Rotate(float input)
+    private void Rotate(float input)
     {
         if (input > 0.05f)
             transform.Rotate(Vector3.up * _moveSpeed * Time.deltaTime);
@@ -58,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
             transform.Rotate(-Vector3.up * _moveSpeed * Time.deltaTime);
     }
 
-    void Jump(bool isPressingJump)
+    private void Jump(bool isPressingJump)
     {
         if (isPressingJump && Physics.Raycast(transform.position, Vector3.down, 0.5f))
                 transform.GetComponent<Rigidbody>().AddForce(0, 200, 0);

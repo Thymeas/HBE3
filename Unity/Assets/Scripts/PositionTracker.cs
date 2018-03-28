@@ -1,19 +1,22 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Linq;
+using UnityEngine;
 
 public class PositionTracker : MonoBehaviour
 {
     [SerializeField] private Waypoints[] _waypoints;
     [SerializeField] private PlayerMovement[] _players;
     [SerializeField] private int _counter;
-    private float _fraction;
+    public int _lap;
+    private float[] _fraction = new float[4];
 
-    void Start()
+    private void Start()
     {
         _players = FindObjectsOfType<PlayerMovement>();
         _waypoints = FindObjectsOfType<Waypoints>();
     }
 
-    void Update()
+    private void Update()
     {
         UpdateCounter();
         CalculatePlayerFraction();
@@ -26,19 +29,21 @@ public class PositionTracker : MonoBehaviour
 
     private void CalculatePlayerFraction()
     {
-        foreach (PlayerMovement t in _players)
-        {
-            GetFractionOfPathCovered(t.transform.position, _waypoints[_counter].transform.position,
-                _waypoints[_counter + 1].transform.position);
-        }
+            for (int t = 0; t < _players.Length; t++)
+            {
+                GetFractionOfPathCovered(_players[t].transform.position, _waypoints[_counter].transform.position,
+                    _waypoints[_counter + 1].transform.position, t);
+            } 
     }
 
-    private float GetFractionOfPathCovered(Vector3 playerPos, Vector3 lastWaypointReached, Vector3 nextWaypoint)
+    private float GetFractionOfPathCovered(Vector3 playerPos, Vector3 lastWaypointReached, Vector3 nextWaypoint, int player)
     {
         Vector3 displacementFromCurrentWaypoint = playerPos - lastWaypointReached;
         Vector3 currentSegmentVector = nextWaypoint - lastWaypointReached;
-        _fraction = Vector3.Dot(displacementFromCurrentWaypoint, currentSegmentVector) /
+        _fraction[player] = Vector3.Dot(displacementFromCurrentWaypoint, currentSegmentVector) /
                          currentSegmentVector.sqrMagnitude;
-        return _fraction;
+        print(Mathf.Min(_fraction) + player);
+        return _fraction[player];
     }
+
 }
