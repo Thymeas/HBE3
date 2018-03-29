@@ -4,44 +4,65 @@ public class PlayerMovement : MonoBehaviour
 {
     private float _startSpeed = 20.0f, _maxSpeed = 75.0f;
     [SerializeField] private float _moveSpeed;
-    public PlayerMovement[] players;
+
+    private Rigidbody _mRigidbody;
+
+    public string _horizontalAxis;
+    public string _verticalAxis;
+    public string _jumpButton;
+    public string _breakButton;
+    private float _inputHorizontal;
+	private float _inputVertical;
 
     private void Start()
     {
         _moveSpeed = _startSpeed;
-        players = FindObjectsOfType<PlayerMovement>();
+        _mRigidbody = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
-        MoveForward(InputManager.MainVertical());
-        Rotate(InputManager.MainHorizontal());
-        Jump(InputManager.AButton());
+        _inputHorizontal = SimpleInput.GetAxis(_horizontalAxis);
+        _inputVertical = SimpleInput.GetAxis(_verticalAxis);
+
+        if (SimpleInput.GetButton(_breakButton))
+            Slip();
+
+        MoveForward();
+        Rotate();
+        Jump();
     }
 
-    void MoveForward(float input)
+    void MoveForward()
     {
-        var movement = Vector3.forward * input;
+        var movement = Vector3.forward * _inputVertical;
         transform.Translate(movement * Time.deltaTime * _moveSpeed);
 
-        if (input > 0.05f && _moveSpeed < _maxSpeed)
-            _moveSpeed += 0.05f;
-        else if (input < 0.05f && _moveSpeed > _startSpeed)
-            _moveSpeed -= 0.05f;
+        if (_inputVertical > 0.05f && _moveSpeed < _maxSpeed)
+            _moveSpeed += 0.5f;
+        else if (_inputVertical < 0.05f && _moveSpeed > _startSpeed)
+            _moveSpeed -= 0.5f;
     }
 
-    void Rotate(float input)
+    void Rotate()
     {
-        if (input > 0.05f)
-            transform.Rotate(Vector3.up * _moveSpeed * Time.deltaTime);
-
-        if (input < -0.05f)
-            transform.Rotate(-Vector3.up * _moveSpeed * Time.deltaTime);
+        transform.Rotate(0f, _inputHorizontal * 2.5f, 0f, Space.World);
     }
 
-    void Jump(bool isPressingJump)
+    void Jump()
     {
-        if (isPressingJump && Physics.Raycast(transform.position, Vector3.down, 0.5f))
-                transform.GetComponent<Rigidbody>().AddForce(0, 200, 0);
+        if (SimpleInput.GetButtonDown(_jumpButton) && IsGrounded())
+            _mRigidbody.AddForce(0f, 5.0f, 0f, ForceMode.Impulse);
+    }
+
+    bool IsGrounded()
+    {
+        return Physics.Raycast(transform.position, Vector3.down, 1.75f);
+    }
+
+    void Slip()
+    {
+        if(_moveSpeed > _startSpeed)
+        _moveSpeed -= 1.0f;
     }
 }
