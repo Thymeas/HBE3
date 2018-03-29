@@ -2,8 +2,8 @@
 
 public class PlayerMovement : MonoBehaviour
 {
-    private float _startSpeed = 20.0f, _maxSpeed = 75.0f;
     [SerializeField] private float _moveSpeed;
+<<<<<<< HEAD
 
     private Rigidbody _mRigidbody;
 
@@ -13,15 +13,31 @@ public class PlayerMovement : MonoBehaviour
     public string _breakButton;
     private float _inputHorizontal;
 	private float _inputVertical;
+=======
+    private float _startSpeed = 20.0f, _maxSpeed = 75.0f;
+    public PlayerMovement[] players;
+>>>>>>> Waypoints
+
+    public Waypoints[] _waypoint;
+    public int counter;
+    [SerializeField] private float distance = 2.0f;
+    private PositionTracker _posTracker;
 
     private void Start()
     {
         _moveSpeed = _startSpeed;
+<<<<<<< HEAD
         _mRigidbody = GetComponent<Rigidbody>();
+=======
+        players = FindObjectsOfType<PlayerMovement>();
+        _waypoint = FindObjectsOfType<Waypoints>();
+        _posTracker = FindObjectOfType<PositionTracker>();
+>>>>>>> Waypoints
     }
 
-    void Update()
+    private void Update()
     {
+<<<<<<< HEAD
         _inputHorizontal = SimpleInput.GetAxis(_horizontalAxis);
         _inputVertical = SimpleInput.GetAxis(_verticalAxis);
 
@@ -34,6 +50,30 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void MoveForward()
+=======
+        CalculateNextWaypoint();
+        MoveForward(Input.GetAxis("Vertical"));
+        Rotate(Input.GetAxis("Horizontal"));
+        Jump(Input.GetKeyDown(KeyCode.Space));     
+    }
+
+    private void CalculateNextWaypoint()
+    {
+        var direction = _waypoint[counter].transform.position - transform.position;
+        if (direction.magnitude < distance)
+        {
+            if (counter < _waypoint.Length - 1)
+                counter++;
+            else
+            {
+                counter = 0;
+                _posTracker._lap += 1;
+            }
+        }
+    }
+
+    private void MoveForward(float input)
+>>>>>>> Waypoints
     {
         var movement = Vector3.forward * _inputVertical;
         transform.Translate(movement * Time.deltaTime * _moveSpeed);
@@ -44,7 +84,11 @@ public class PlayerMovement : MonoBehaviour
             _moveSpeed -= 0.5f;
     }
 
+<<<<<<< HEAD
     void Rotate()
+=======
+    private void Rotate(float input)
+>>>>>>> Waypoints
     {
         transform.Rotate(0f, _inputHorizontal * 2.5f, 0f, Space.World);
     }
@@ -60,9 +104,15 @@ public class PlayerMovement : MonoBehaviour
         return Physics.Raycast(transform.position, Vector3.down, 1.75f);
     }
 
+<<<<<<< HEAD
     void Slip()
+=======
+    private void Jump(bool isPressingJump)
+>>>>>>> Waypoints
     {
         if(_moveSpeed > _startSpeed)
         _moveSpeed -= 1.0f;
     }
+
+    
 }
