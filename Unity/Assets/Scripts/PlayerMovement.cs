@@ -14,9 +14,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        MoveForward(Input.GetAxis("Vertical"));
-        Rotate(Input.GetAxis("Horizontal"));
-        Jump(Input.GetKeyDown(KeyCode.Space));
+        MoveForward(InputManager.MainVertical());
+        Rotate(InputManager.MainHorizontal());
+        Jump(InputManager.AButton());
     }
 
     void MoveForward(float input)
