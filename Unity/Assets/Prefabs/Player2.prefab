@@ -563,7 +563,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1955133783475508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.804982, y: -48.93195, z: 22.944054}
+  m_LocalPosition: {x: -154.0694, y: -49.36393, z: -131.36215}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4043497813051566}
@@ -1652,10 +1652,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 0
-  _horizontalAxis: 
-  _verticalAxis: 
-  _jumpButton: 
-  _breakButton: 
+  _horizontalAxis: L_XAxis_1
+  _verticalAxis: L_YAxis_1
+  _jumpButton: A_1
+  _breakButton: B_1
 --- !u!124 &124435720712689074
 Behaviour:
   m_ObjectHideFlags: 1
