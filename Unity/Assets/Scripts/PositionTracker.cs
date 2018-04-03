@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using UnityEngine;
 
 
 [Serializable]
-public struct X
+public struct Fraction
 {
-    public float Fraction;
+    public float _fraction;
     public PlayerMovement PlayerMovement;
 }
 
@@ -17,19 +16,17 @@ public class PositionTracker : MonoBehaviour
     [SerializeField] private Waypoints[] _waypoints;
     [SerializeField] private PlayerMovement[] _players;
     [SerializeField] private int _counter;
-    public int _lap;
-    private float[] _fraction = new float[4];
-    [SerializeField] private List<X> _xs = new List<X>(4);
+    public List<Fraction> _xs = new List<Fraction>(4);
 
     private void Start()
     {
         _players = FindObjectsOfType<PlayerMovement>();
         _waypoints = FindObjectsOfType<Waypoints>();
+                UpdateCounter();
     }
 
     private void Update()
     {
-        UpdateCounter();
         CalculatePlayerFraction();
     }
 
@@ -47,14 +44,14 @@ public class PositionTracker : MonoBehaviour
                 _waypoints[_counter].transform.position,
                 _waypoints[_counter + 1].transform.position);
 
-            _xs[t] = new X
+            _xs[t] = new Fraction
             {
-                Fraction = fraction,
+                _fraction = fraction,
                 PlayerMovement = player
             };
         }
 
-        _xs = _xs.OrderBy(x => x.Fraction).ToList();
+        _xs = _xs.OrderBy(x => x._fraction).ToList();
     }
 
     private float GetFractionOfPathCovered(Vector3 playerPos, Vector3 lastWaypointReached, Vector3 nextWaypoint)
