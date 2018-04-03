@@ -1686,13 +1686,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 0
-  _waypoint: []
+  _waypoint:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   counter: 0
-  distance: 2
-  _horizontalAxis: 
-  _verticalAxis: 
-  _jumpButton: 
-  _breakButton: 
+  _lap: 0
+  _horizontalAxis: L_XAxis_1
+  _verticalAxis: L_YAxis_1
+  _jumpButton: A_1
+  _breakButton: B_1
 --- !u!124 &124893852771194026
 Behaviour:
   m_ObjectHideFlags: 1

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -8,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody _mRigidbody;
 
-     public Waypoints[] _waypoint;
+    public Waypoints[] _waypoint;
     public int counter;
     public int _lap;
     private float distance = 2.0f;
@@ -26,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
         _moveSpeed = _startSpeed;
         _mRigidbody = GetComponent<Rigidbody>();
         _waypoint = FindObjectsOfType<Waypoints>();
+        //_waypoint.Reverse();
     }
 
     void Update()
