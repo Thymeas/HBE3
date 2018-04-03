@@ -22,7 +22,7 @@ public class PositionTracker : MonoBehaviour
     {
         _players = FindObjectsOfType<PlayerMovement>();
         _waypoints = FindObjectsOfType<Waypoints>();
-                UpdateCounter();
+        UpdateCounter();
     }
 
     private void Update()

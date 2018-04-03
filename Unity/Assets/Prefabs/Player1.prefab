@@ -103,10 +103,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4700440035131832}
   - component: {fileID: 95149667368827580}
-  - component: {fileID: 54740131163096496}
   - component: {fileID: 65597805302515188}
-  - component: {fileID: 114504537597636042}
   - component: {fileID: 23604872146187146}
+  - component: {fileID: 54018448897690142}
+  - component: {fileID: 65994694552848078}
+  - component: {fileID: 114141599364464388}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -345,7 +346,6 @@ GameObject:
   - component: {fileID: 4323139697123740}
   - component: {fileID: 20711655071567494}
   - component: {fileID: 124893852771194026}
-  - component: {fileID: 81267877646311966}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -637,8 +637,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1331101982274268}
-  m_LocalRotation: {x: -0, y: -0.0000059604636, z: -0, w: -1}
-  m_LocalPosition: {x: 7.3, y: -48.61, z: 69.2}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.3, y: -47.29, z: 23.486}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4320237353377526}
@@ -1604,7 +1604,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1500316201836578}
   m_Mesh: {fileID: 4300010, guid: 9a91c5e887f917e419bfe9f63efe6056, type: 3}
---- !u!54 &54740131163096496
+--- !u!54 &54018448897690142
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1645,13 +1645,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.467821, y: 1.1285515, z: 5.0424175}
   m_Center: {x: 0.041231513, y: 0.18472862, z: -0.15779972}
---- !u!81 &81267877646311966
-AudioListener:
+--- !u!65 &65994694552848078
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1876308463015936}
+  m_GameObject: {fileID: 1331101982274268}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.467821, y: 1.1285515, z: 5.0424175}
+  m_Center: {x: 0.041231513, y: 0.18472862, z: -0.15779972}
 --- !u!95 &95149667368827580
 Animator:
   serializedVersion: 3
@@ -1669,7 +1674,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114504537597636042
+--- !u!114 &114141599364464388
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1680,7 +1685,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f4280e9b2035b3479bd0637a9c554d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 45
+  _moveSpeed: 0
+  _waypoint: []
+  counter: 0
+  distance: 2
   _horizontalAxis: 
   _verticalAxis: 
   _jumpButton: 

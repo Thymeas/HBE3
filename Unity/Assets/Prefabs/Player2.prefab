@@ -361,7 +361,6 @@ GameObject:
   - component: {fileID: 4046009217599672}
   - component: {fileID: 20333113966448088}
   - component: {fileID: 124435720712689074}
-  - component: {fileID: 81837342441099764}
   m_Layer: 0
   m_Name: Main Camera (1)
   m_TagString: MainCamera
@@ -381,7 +380,7 @@ GameObject:
   - component: {fileID: 54586976801540058}
   - component: {fileID: 65478913288007174}
   - component: {fileID: 23201235288887142}
-  - component: {fileID: 114981388584604014}
+  - component: {fileID: 114214902876894614}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Untagged
@@ -418,7 +417,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1948494409794988}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 30, z: 0}
+  m_LocalPosition: {x: 0, y: 30, z: 7.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4484373498950654}
@@ -563,7 +562,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1955133783475508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -154.0694, y: -49.36393, z: -131.36215}
+  m_LocalPosition: {x: -45.9, y: -45, z: -0.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4043497813051566}
@@ -1616,13 +1615,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.467821, y: 1.1285515, z: 5.0424175}
   m_Center: {x: 0.041231513, y: 0.18472862, z: -0.15779972}
---- !u!81 &81837342441099764
-AudioListener:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1948494409794988}
-  m_Enabled: 1
 --- !u!95 &95063031191406858
 Animator:
   serializedVersion: 3
@@ -1640,7 +1632,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114981388584604014
+--- !u!114 &114214902876894614
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1652,10 +1644,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 0
-  _horizontalAxis: L_XAxis_1
-  _verticalAxis: L_YAxis_1
-  _jumpButton: A_1
-  _breakButton: B_1
+  _waypoint: []
+  counter: 0
+  distance: 2
+  _horizontalAxis: 
+  _verticalAxis: 
+  _jumpButton: 
+  _breakButton: 
 --- !u!124 &124435720712689074
 Behaviour:
   m_ObjectHideFlags: 1

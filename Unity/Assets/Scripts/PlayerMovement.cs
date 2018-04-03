@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -6,6 +7,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _moveSpeed;
 
     private Rigidbody _mRigidbody;
+
+     public Waypoints[] _waypoint;
+    public int counter;
+    public int _lap;
+    private float distance = 2.0f;
+
 
     public string _horizontalAxis;
     public string _verticalAxis;
@@ -18,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _moveSpeed = _startSpeed;
         _mRigidbody = GetComponent<Rigidbody>();
+        _waypoint = FindObjectsOfType<Waypoints>();
     }
 
     void Update()
@@ -29,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
             Slip();
 
         MoveForward();
+        CalculateNextWaypoint();
         Rotate();
         Jump();
     }
@@ -42,6 +51,20 @@ public class PlayerMovement : MonoBehaviour
             _moveSpeed += 0.5f;
         else if (_inputVertical < 0.05f && _moveSpeed > _startSpeed)
             _moveSpeed -= 0.5f;
+    }
+    private void CalculateNextWaypoint()
+    {
+        var direction = _waypoint[counter].transform.position - transform.position;
+        if (direction.magnitude < distance)
+        {
+            if (counter < _waypoint.Length - 1)
+                counter++;
+            else
+            {
+                counter = 0;
+                _lap += 1;
+            }
+        }
     }
 
     void Rotate()
