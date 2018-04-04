@@ -106,7 +106,6 @@ GameObject:
   - component: {fileID: 65597805302515188}
   - component: {fileID: 23604872146187146}
   - component: {fileID: 54018448897690142}
-  - component: {fileID: 65994694552848078}
   - component: {fileID: 114141599364464388}
   m_Layer: 0
   m_Name: Player1
@@ -517,7 +516,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1876308463015936}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 30, z: 7.5}
+  m_LocalPosition: {x: 0, y: 40, z: 15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4700440035131832}
@@ -637,15 +636,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1331101982274268}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.3, y: -47.29, z: 23.486}
+  m_LocalRotation: {x: -0, y: 0.70710576, z: -0, w: 0.7071079}
+  m_LocalPosition: {x: -35, y: -50.5, z: -3.6999998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4320237353377526}
   - {fileID: 4323139697123740}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -359.999, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -270, z: 0}
 --- !u!4 &4724110982901790
 Transform:
   m_ObjectHideFlags: 1
@@ -1645,18 +1644,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.467821, y: 1.1285515, z: 5.0424175}
   m_Center: {x: 0.041231513, y: 0.18472862, z: -0.15779972}
---- !u!65 &65994694552848078
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1331101982274268}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.467821, y: 1.1285515, z: 5.0424175}
-  m_Center: {x: 0.041231513, y: 0.18472862, z: -0.15779972}
 --- !u!95 &95149667368827580
 Animator:
   serializedVersion: 3
@@ -1687,6 +1674,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 0
   _waypoint:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

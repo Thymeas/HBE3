@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private float _startSpeed = 20.0f, _maxSpeed = 75.0f;
+    private float _startSpeed = 10.0f, _maxSpeed = 50.0f;
     [SerializeField] private float _moveSpeed;
+    private float _rotationspeed = 2.5f;
 
-    private Rigidbody _mRigidbody;
+   // private Rigidbody _mRigidbody;
 
     public Waypoints[] _waypoint;
     public int counter;
     public int _lap;
-    private float distance = 2.0f;
+    private float distance = 20.0f;
 
 
     public string _horizontalAxis;
@@ -25,9 +26,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         _moveSpeed = _startSpeed;
-        _mRigidbody = GetComponent<Rigidbody>();
-        _waypoint = FindObjectsOfType<Waypoints>();
-        //_waypoint.Reverse();
+        //_mRigidbody = GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -37,11 +36,14 @@ public class PlayerMovement : MonoBehaviour
 
         if (SimpleInput.GetButton(_breakButton))
             Slip();
+        else
+            _rotationspeed = 2.5f;
+        
 
         MoveForward();
         CalculateNextWaypoint();
         Rotate();
-        Jump();
+       // Jump();
     }
 
     void MoveForward()
@@ -56,7 +58,9 @@ public class PlayerMovement : MonoBehaviour
     }
     private void CalculateNextWaypoint()
     {
+
         var direction = _waypoint[counter].transform.position - transform.position;
+        print(direction.magnitude);
         if (direction.magnitude < distance)
         {
             if (counter < _waypoint.Length - 1)
@@ -71,23 +75,25 @@ public class PlayerMovement : MonoBehaviour
 
     void Rotate()
     {
-        transform.Rotate(0f, _inputHorizontal * 2.5f, 0f, Space.World);
+        transform.Rotate(0f, _inputHorizontal * _rotationspeed, 0f, Space.World);
     }
 
-    void Jump()
-    {
-        if (SimpleInput.GetButtonDown(_jumpButton) && IsGrounded())
-            _mRigidbody.AddForce(0f, 5.0f, 0f, ForceMode.Impulse);
-    }
+    //void Jump()
+    //{
+    //    if (SimpleInput.GetButtonDown(_jumpButton) && IsGrounded())
+    //        _mRigidbody.AddForce(0f, 5.0f, 0f, ForceMode.Impulse);
+    //}
 
-    bool IsGrounded()
-    {
-        return Physics.Raycast(transform.position, Vector3.down, 1.75f);
-    }
+    //bool IsGrounded()
+    //{
+    //    return Physics.Raycast(transform.position, Vector3.down, 1.75f);
+    //}
 
     void Slip()
     {
-        if(_moveSpeed > _startSpeed)
-        _moveSpeed -= 1.0f;
+        if (_moveSpeed > _startSpeed)
+            _moveSpeed -= 1.0f;
+
+        _rotationspeed = 5.0f;
     }
 }
