@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine.Experimental.UIElements;
 
 public class Respawning : MonoBehaviour
 {
-    [SerializeField] private Waypoints[] waypoints;
+    [NonSerialized] private Waypoints[] waypoints;
     
     void Start()
     {

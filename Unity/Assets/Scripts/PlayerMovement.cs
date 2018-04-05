@@ -31,19 +31,28 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        _inputHorizontal = SimpleInput.GetAxis(_horizontalAxis);
-        _inputVertical = SimpleInput.GetAxis(_verticalAxis);
+        if (UIManager._canCount)
+        {
+            _inputHorizontal = SimpleInput.GetAxis(_horizontalAxis);
+            _inputVertical = SimpleInput.GetAxis(_verticalAxis);
 
-        if (SimpleInput.GetButton(_breakButton))
-            Slip();
-        else
-            _rotationspeed = 2.5f;
-        
+            if (SimpleInput.GetButton(_breakButton))
+                Slip();
+            else
+                _rotationspeed = 2.5f;
 
-        MoveForward();
-        CalculateNextWaypoint();
-        Rotate();
-       // Jump();
+            MoveForward();
+            CalculateNextWaypoint();
+            Rotate();
+            // Jump();
+        }
+
+        if (_lap >= 3)
+        {
+            UIManager._canCount = false;
+            InputMenu.LoadWinScreen();
+            WinBoard._winner = this.name;
+        }
     }
 
     void MoveForward()
@@ -60,7 +69,6 @@ public class PlayerMovement : MonoBehaviour
     {
 
         var direction = _waypoint[counter].transform.position - transform.position;
-        print(direction.magnitude);
         if (direction.magnitude < distance)
         {
             if (counter < _waypoint.Length - 1)

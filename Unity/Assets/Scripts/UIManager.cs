@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text[] _timeText, _lapsText;
     [SerializeField] private float _time;
     [SerializeField] private PlayerMovement[] _players;
-    public bool _canCount;
+    public static bool _canCount;
 
     void Update()
     {
