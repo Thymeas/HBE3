@@ -2,7 +2,7 @@
 
 public class CountDown : MonoBehaviour {
 
-    public float countdown = 3.0f;
+    public float countdown = 4.0f;
     private float _time = 0;        
     private bool called = false; 
 

@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private float _startSpeed = 10.0f, _maxSpeed = 50.0f;
+    private float _startSpeed = 20.0f, _maxSpeed = 50.0f;
     [SerializeField] private float _moveSpeed;
-    private float _rotationspeed = 2.5f;
+    private float _rotationspeed = 1.5f;
+    private ParticleSystem _particle;
+    private InputControls _inputControls;
+    public bool _onRoad;
 
    // private Rigidbody _mRigidbody;
 
     public Waypoints[] _waypoint;
     public int counter;
     public int _lap;
-    private float distance = 20.0f;
+    private float distance = 10.0f;
 
 
     public string _horizontalAxis;
@@ -26,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         _moveSpeed = _startSpeed;
+        _particle = GetComponentInChildren<ParticleSystem>();
+        _inputControls = FindObjectOfType<InputControls>();
         //_mRigidbody = GetComponent<Rigidbody>();
     }
 
@@ -53,6 +58,9 @@ public class PlayerMovement : MonoBehaviour
             InputMenu.LoadWinScreen();
             WinBoard._winner = this.name;
         }
+
+        if (!_onRoad && _moveSpeed > _startSpeed)
+            _moveSpeed -= 1.0f;
     }
 
     void MoveForward()
@@ -72,7 +80,11 @@ public class PlayerMovement : MonoBehaviour
         if (direction.magnitude < distance)
         {
             if (counter < _waypoint.Length - 1)
+            {
+
                 counter++;
+                _particle.Play();
+            }
             else
             {
                 counter = 0;
@@ -102,6 +114,23 @@ public class PlayerMovement : MonoBehaviour
         if (_moveSpeed > _startSpeed)
             _moveSpeed -= 1.0f;
 
-        _rotationspeed = 5.0f;
+        _rotationspeed = 3.5f;
     }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.GetComponent<Road>())
+            _onRoad = true;
+        else
+        {
+            _onRoad = false;
+        }
+      
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        _onRoad = false;
+    }
+
 }
