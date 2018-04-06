@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
-{
+{ 
     private float _startSpeed = 20.0f, _maxSpeed = 50.0f;
     [SerializeField] private float _moveSpeed;
     private float _rotationspeed = 1.5f;
@@ -128,9 +128,24 @@ public class PlayerMovement : MonoBehaviour
       
     }
 
+    void OnCollisonStay(Collision other)
+    {
+        if (other.collider.GetComponent<Road>())
+            _onRoad = true;
+        else
+        {
+            _onRoad = false;
+        }
+
+    }
+
     void OnTriggerExit(Collider other)
     {
         _onRoad = false;
     }
 
+    void OnCollisionExit(Collision other)
+    {
+        _onRoad = false;
+    }
 }

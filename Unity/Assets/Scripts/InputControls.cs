@@ -25,7 +25,6 @@ public class InputControls : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
 
-        _players = FindObjectsOfType<PlayerMovement>();
         _menu = FindObjectOfType<InputMenu>();
         //_players = _players.Reverse().ToArray();
     }
