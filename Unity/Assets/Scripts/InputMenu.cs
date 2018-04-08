@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using NUnit.Framework.Constraints;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,9 +11,8 @@ public class InputMenu : MonoBehaviour
     public string[] _horizontalAxis, _verticalAxis, _jumpButton, _breakButton;
     private float[] _inputHorizontal, _inputVertical;
     [SerializeField] private GameObject[] screens;
+    [SerializeField] private GameObject[] _controlButtons;
     private InputControls _controls;
-
-    [NonSerialized] public Button _keyboard;
 
     //private PlayerMovement _player1, _player2;
     private bool _hasSelecterKeyboard;
@@ -36,14 +36,14 @@ public class InputMenu : MonoBehaviour
         //_player2 = FindObjectOfType<Two>().GetComponent<PlayerMovement>();
     }
 
-    //void Update()
-    //{
-    //    if (player >= 2 && canLoadLevel)
-    //    {
-    //        DoneButton();
-    //        canLoadLevel = false;
-    //    }
-    //}
+    void Update()
+    {
+        if (player >= 2 && canLoadLevel)
+        {
+            DoneButton();
+            canLoadLevel = false;
+        }  
+    }
 
     public void DoneButton()
     {
@@ -52,7 +52,17 @@ public class InputMenu : MonoBehaviour
 
     public void PlayMenu()
     {
-        LoadLevel();
+        for (int i = 0; i < screens.Length; i++)
+        {
+            screens[i].SetActive(false);
+        }
+        screens[2].SetActive(true);
+
+        for (int i = 0; i < _controlButtons.Length; i++)
+        {
+            _controlButtons[i].SetActive(false);
+        }
+        _controlButtons[0].SetActive(true);
     }
 
     public void OptionsMenu()
@@ -102,38 +112,44 @@ public class InputMenu : MonoBehaviour
         Application.Quit();
     }
 
-    //public void Keyboard()
-    //{
-    //    if (player < 2)
-    //        player += 1;
+    public void Keyboardp1()
+    {
+        _controls.playerPickedKeyboard[player] = true;
+        player += 1;
 
-    //    PlayerControllerCheck(controls.KEYBOARD, player);
-    //    if(_keyboard!= null)
-    //    _keyboard.interactable = false;
-    //}
+        nextPlayer();
+    }
 
-    //public void Controller()
-    //{
-    //    if (player < 2)
-    //        player += 1;
+    public void Keyboardp2()
+    {
+        if(!_controls.playerPickedKeyboard[0])
+        _controls.playerPickedKeyboard[player] = true;         
 
-    //    PlayerControllerCheck(controls.CONTROLLER, player);
-    //}
+        player += 1;
+    }
 
-    //private void PlayerControllerCheck(controls controller, int player)
-    //{
-    //    switch (player)
-    //    {
-    //        case 0:
-    //            break;
-    //        case 1:
-    //            if (controller == controls.KEYBOARD)
-    //                _controls.SetKeyboardToPlayer(player);
-    //                break;
-    //        case 2:
-    //            if (controller == controls.KEYBOARD)
-    //                _controls.SetControllerToPlayer(player);
-    //            break;
-    //    }
-    //}
+    public void ControllerP1()
+    {
+        _controls.playerPickedController[player] = true;
+        player += 1;
+        nextPlayer();
+    }
+
+    public void ControllerP2()
+    {
+        _controls.playerPickedController[player] = true;
+        player += 1;
+    }
+
+    public void nextPlayer()
+    {
+        if (player == 1)
+        {
+            for (int i = 0; i < _controlButtons.Length; i++)
+            {
+                _controlButtons[i].SetActive(false);
+            }
+            _controlButtons[1].SetActive(true);
+        }
+    }
 }

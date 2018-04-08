@@ -7,7 +7,9 @@ public class InputControls : MonoBehaviour
 {
      public PlayerMovement[] _players;
     private InputMenu _menu;
-    [NonSerialized] public static int _player;
+
+    public bool[] playerPickedController;
+    public bool[] playerPickedKeyboard;
 
     [NonSerialized] public string _horizontalJ1 = "L_XAxis_1";
     [NonSerialized] public string _horizontalJ2 = "L_XAxis_2";
@@ -23,41 +25,56 @@ public class InputControls : MonoBehaviour
 
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(this);
 
         _menu = FindObjectOfType<InputMenu>();
-        //_players = _players.Reverse().ToArray();
-    }
 
-    public void SetKeyboardToPlayer(int player)
-    {
-        _players[player]._horizontalAxis = _horizontalK;
-        _players[player]._verticalAxis = _verticalK;
-        _players[player]._breakButton = _breakK;
-    }
-
-    public void SetControllerToPlayer(int player)
-    {
-        switch (player)
+        SceneManager.sceneLoaded += (scene, mode) =>
         {
-            case 0:
-                break;
-            case 1:
-                _players[player]._horizontalAxis = _horizontalJ1;
-                _players[player]._verticalAxis = _verticalJ1;
-                _players[player]._breakButton = _breakJ1;
-                break;
-            case 2:
-                if (!_menu._keyboard.IsActive())
-                {
-                    _players[player]._horizontalAxis = _horizontalJ1;
-                    _players[player]._verticalAxis = _verticalJ1;
-                    _players[player]._breakButton = _breakJ1;
-                }
-                _players[player]._horizontalAxis = _horizontalJ2;
-                _players[player]._verticalAxis = _verticalJ2;
-                _players[player]._breakButton = _breakJ2;
-                break;
+            if (scene.name == "Level1")
+            {
+                _players = FindObjectsOfType<PlayerMovement>();
+                SetControllerToPlayer();
+                //_players = _players.Reverse().ToArray();
+            }
+        };
+    }
+
+    public void SetControllerToPlayer()
+    {
+        if (playerPickedKeyboard[0])
+        {
+            _players[0]._horizontalAxis = _horizontalK;
+            _players[0]._verticalAxis = _verticalK;
+            _players[0]._breakButton = _breakK;
+        }
+
+        if (playerPickedKeyboard[1])
+        {
+            _players[1]._horizontalAxis = _horizontalK;
+            _players[1]._verticalAxis = _verticalK;
+            _players[1]._breakButton = _breakK;
+        }
+
+        if (playerPickedController[0])
+        {
+            _players[0]._horizontalAxis = _horizontalJ1;
+            _players[0]._verticalAxis = _verticalJ1;
+            _players[0]._breakButton = _breakJ1;
+        }
+
+        if (playerPickedController[1])
+        {
+            _players[0]._horizontalAxis = _horizontalJ2;
+            _players[0]._verticalAxis = _verticalJ2;
+            _players[0]._breakButton = _breakJ2;
+
+            if(!playerPickedController[0])
+            {
+                _players[0]._horizontalAxis = _horizontalJ1;
+                _players[0]._verticalAxis = _verticalJ1;
+                _players[0]._breakButton = _breakJ1;
+            }
         }
     }
 }
