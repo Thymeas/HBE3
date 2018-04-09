@@ -8,10 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _moveSpeed;
     private float _rotationspeed = 1.5f;
     private ParticleSystem _particle;
-    private InputControls _inputControls;
     public bool _onRoad;
-
-   // private Rigidbody _mRigidbody;
 
     public Waypoints[] _waypoint;
     public int counter;
@@ -30,8 +27,6 @@ public class PlayerMovement : MonoBehaviour
     {
         _moveSpeed = _startSpeed;
         _particle = GetComponentInChildren<ParticleSystem>();
-        _inputControls = FindObjectOfType<InputControls>();
-        //_mRigidbody = GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -49,7 +44,6 @@ public class PlayerMovement : MonoBehaviour
             MoveForward();
             CalculateNextWaypoint();
             Rotate();
-            // Jump();
         }
 
         if (_lap >= 3)
@@ -97,17 +91,6 @@ public class PlayerMovement : MonoBehaviour
     {
         transform.Rotate(0f, _inputHorizontal * _rotationspeed, 0f, Space.World);
     }
-
-    //void Jump()
-    //{
-    //    if (SimpleInput.GetButtonDown(_jumpButton) && IsGrounded())
-    //        _mRigidbody.AddForce(0f, 5.0f, 0f, ForceMode.Impulse);
-    //}
-
-    //bool IsGrounded()
-    //{
-    //    return Physics.Raycast(transform.position, Vector3.down, 1.75f);
-    //}
 
     void Slip()
     {

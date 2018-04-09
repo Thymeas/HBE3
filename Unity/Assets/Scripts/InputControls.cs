@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class InputControls : MonoBehaviour
 {
      public PlayerMovement[] _players;
-    private InputMenu _menu;
 
     public bool[] playerPickedController;
     public bool[] playerPickedKeyboard;
@@ -26,8 +25,6 @@ public class InputControls : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(this);
-
-        _menu = FindObjectOfType<InputMenu>();
 
         SceneManager.sceneLoaded += (scene, mode) =>
         {

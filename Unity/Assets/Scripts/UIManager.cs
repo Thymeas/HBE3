@@ -7,11 +7,23 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private Text[] _timeText, _lapsText;
     [SerializeField] private float _time;
+    [SerializeField] private float _countDown;
     [SerializeField] private PlayerMovement[] _players;
+    [SerializeField] private AudioClip _countdownClip;
     public static bool _canCount;
+
+    void Start()
+    {
+        _countDown = _countdownClip.length;
+        _time = 0;
+    }
 
     void Update()
     {
+        _countDown -= 0.025f;
+        if (_countDown <= 0)
+            _canCount = true;
+
         if (_canCount)
             _time = Time.time;
 
