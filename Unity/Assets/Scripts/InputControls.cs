@@ -32,7 +32,6 @@ public class InputControls : MonoBehaviour
             {
                 _players = FindObjectsOfType<PlayerMovement>();
                 SetControllerToPlayer();
-                //_players = _players.Reverse().ToArray();
             }
         };
     }

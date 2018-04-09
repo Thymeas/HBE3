@@ -9,7 +9,6 @@ public class InputMenu : MonoBehaviour
     [SerializeField] private GameObject[] _controlButtons;
     private InputControls _controls;
 
-    //private PlayerMovement _player1, _player2;
     private bool _hasSelecterKeyboard;
 
     private AudioSource _audio;
@@ -27,8 +26,6 @@ public class InputMenu : MonoBehaviour
         DontDestroyOnLoad(this);
         _audio = FindObjectOfType<AudioSource>();
         _controls = FindObjectOfType<InputControls>();
-        //_player1 = FindObjectOfType<One>().GetComponent<PlayerMovement>();
-        //_player2 = FindObjectOfType<Two>().GetComponent<PlayerMovement>();
     }
 
     void Update()
