@@ -95,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
     void Slip()
     {
         if (_moveSpeed > _startSpeed)
-            _moveSpeed -= 1.0f;
+            _moveSpeed -= 0.75f;
 
         _rotationspeed = 3.5f;
     }
